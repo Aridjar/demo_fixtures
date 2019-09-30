@@ -1,0 +1,30 @@
+version: '2'
+
+services:
+    postgres:
+        image: postgres
+        volumes:
+            - "./.data/postgres:/var/lib/postgresql"
+        environment:
+            POSTGRES_USER: ${PSQL_USER}
+            POSTGRES_PASSWORD: ${PSQL_PWD}
+            POOL: 100
+        ports:
+            - "5432:5432"
+    elixir:
+        build: .
+        ports:
+            - "4000:4000"
+            - "4002:4002"
+        volumes:
+            - ".:/app"
+            - "/app/assets/node_modules"
+            - "/deps"
+        depends_on:
+            - postgres
+        environment:
+          POSTGRES_USER: ${PSQL_USER}
+          POSTGRES_PASSWORD: ${PSQL_PWD}
+          POSTGRES_DB_TEST: ${PSQL_DB_TEST}
+          POSTGRES_DB_DEV: ${PSQL_DB_DEV}
+          POSTGRES_HOST: ${PSQL_HOST}
