@@ -17,6 +17,7 @@ To start your Phoenix server:
     $> docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' [ID_POSTGRES_CONTAINER]
     ```
   * In the .env file, put the IP in the `host` field
-  * Run your elixir container with `docker-compose up elixir` (you can silence it with the `-d` param before `elixir`)
+  * Run your elixir container with `docker-compose up -d elixir`
+  * Finally, create the database with `docker-compose exec elixir mix ecto.create`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
