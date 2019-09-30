@@ -1,23 +1,8 @@
 defmodule DemoFixtures.PostsTest do
   use DemoFixtures.DataCase
-
-  alias DemoFixtures.Posts
+  use DemoFixtures.Fixtures, [:post]
 
   describe "posts" do
-    alias DemoFixtures.Posts.Post
-
-    @valid_attrs %{content: "some content", title: "some title"}
-    @update_attrs %{content: "some updated content", title: "some updated title"}
-    @invalid_attrs %{content: nil, title: nil}
-
-    def post_fixture(attrs \\ %{}) do
-      {:ok, post} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Posts.create_post()
-
-      post
-    end
 
     test "list_posts/0 returns all posts" do
       post = post_fixture()

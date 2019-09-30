@@ -1,16 +1,6 @@
 defmodule DemoFixturesWeb.PostControllerTest do
   use DemoFixturesWeb.ConnCase
-
-  alias DemoFixtures.Posts
-
-  @create_attrs %{content: "some content", title: "some title"}
-  @update_attrs %{content: "some updated content", title: "some updated title"}
-  @invalid_attrs %{content: nil, title: nil}
-
-  def fixture(:post) do
-    {:ok, post} = Posts.create_post(@create_attrs)
-    post
-  end
+  use DemoFixtures.Fixtures, [:post]
 
   describe "index" do
     test "lists all posts", %{conn: conn} do
@@ -28,7 +18,7 @@ defmodule DemoFixturesWeb.PostControllerTest do
 
   describe "create post" do
     test "redirects to show when data is valid", %{conn: conn} do
-      conn = post(conn, Routes.post_path(conn, :create), post: @create_attrs)
+      conn = post(conn, Routes.post_path(conn, :create), post: @valid_attrs)
 
       assert %{id: id} = redirected_params(conn)
       assert redirected_to(conn) == Routes.post_path(conn, :show, id)
@@ -79,10 +69,5 @@ defmodule DemoFixturesWeb.PostControllerTest do
         get(conn, Routes.post_path(conn, :show, post))
       end
     end
-  end
-
-  defp create_post(_) do
-    post = fixture(:post)
-    {:ok, post: post}
   end
 end
