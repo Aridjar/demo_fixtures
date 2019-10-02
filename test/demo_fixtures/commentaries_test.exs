@@ -1,6 +1,6 @@
 defmodule DemoFixtures.CommentariesTest do
   use DemoFixtures.DataCase
-  use DemoFixtures.Fixtures, [:commentary]
+  use DemoFixtures.Fixtures, [:post, :commentary]
 
   describe "commentaries" do
 

@@ -1,6 +1,6 @@
 defmodule DemoFixturesWeb.CommentaryControllerTest do
   use DemoFixturesWeb.ConnCase
-  use DemoFixtures.Fixtures, [:commentary]
+  use DemoFixtures.Fixtures, [:post, :commentary]
 
   describe "index" do
     test "lists all commentaries", %{conn: conn} do

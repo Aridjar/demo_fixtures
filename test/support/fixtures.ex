@@ -8,9 +8,9 @@ defmodule DemoFixtures.Fixtures do
       @update_attrs %{content: "some updated content", title: "some updated title"}
       @invalid_attrs %{content: nil, title: nil}
 
-      defp create_post(_) do
+      def create_post(_ \\ nil) do
         post = post_fixture()
-        {:ok, post: post}
+        %{post: post}
       end
 
       defp post_fixture(attrs \\ %{}) do
@@ -30,15 +30,22 @@ defmodule DemoFixtures.Fixtures do
       @update_attrs %{content: "some updated content"}
       @invalid_attrs %{content: nil}
 
-      defp create_commentary(_) do
+      def create_commentary(_ \\ nil) do
         commentary = commentary_fixture()
-        {:ok, commentary: commentary}
+        %{commentary: commentary}
       end
 
       def commentary_fixture(attrs \\ %{}) do
+        commentary = create_commentary_attrs()
+
         attrs
-        |> Enum.into(@valid_attrs)
+        |> Enum.into(commentary)
         |> unquote(__MODULE__).general_fixture(&Commentaries.create_commentary/1)
+      end
+
+      def create_commentary_attrs() do
+        __MODULE__.create_post()
+        |> Enum.into(@valid_attrs)
       end
     end
   end
