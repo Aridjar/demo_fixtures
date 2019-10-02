@@ -1,0 +1,13 @@
+<h1>Show Commentary</h1>
+
+<ul>
+
+  <li>
+    <strong>Content:</strong>
+    <%= @commentary.content %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.commentary_path(@conn, :edit, @commentary) %></span>
+<span><%= link "Back", to: Routes.commentary_path(@conn, :index) %></span>

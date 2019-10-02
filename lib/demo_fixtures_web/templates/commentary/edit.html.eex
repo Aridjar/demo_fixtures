@@ -1,0 +1,5 @@
+<h1>Edit Commentary</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.commentary_path(@conn, :update, @commentary)) %>
+
+<span><%= link "Back", to: Routes.commentary_path(@conn, :index) %></span>

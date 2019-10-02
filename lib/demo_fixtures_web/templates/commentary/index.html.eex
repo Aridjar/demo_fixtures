@@ -1,0 +1,26 @@
+<h1>Listing Commentaries</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Content</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for commentary <- @commentaries do %>
+    <tr>
+      <td><%= commentary.content %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.commentary_path(@conn, :show, commentary) %></span>
+        <span><%= link "Edit", to: Routes.commentary_path(@conn, :edit, commentary) %></span>
+        <span><%= link "Delete", to: Routes.commentary_path(@conn, :delete, commentary), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Commentary", to: Routes.commentary_path(@conn, :new) %></span>
