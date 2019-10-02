@@ -14,12 +14,9 @@ defmodule DemoFixtures.Fixtures do
       end
 
       defp post_fixture(attrs \\ %{}) do
-        {:ok, post} =
-          attrs
-          |> Enum.into(@valid_attrs)
-          |> Posts.create_post()
-
-        post
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> unquote(__MODULE__).general_fixture(&Posts.create_post/1)
       end
 
     end
@@ -39,17 +36,22 @@ defmodule DemoFixtures.Fixtures do
       end
 
       def commentary_fixture(attrs \\ %{}) do
-        {:ok, commentary} =
-          attrs
-          |> Enum.into(@valid_attrs)
-          |> Commentaries.create_commentary()
-
-        commentary
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> unquote(__MODULE__).general_fixture(&Commentaries.create_commentary/1)
       end
     end
   end
 
   defmacro __using__(fixtures) when is_list(fixtures) do
     for fixture <- fixtures, is_atom(fixture), do: apply(__MODULE__, fixture, [])
+  end
+
+  def general_fixture(attrs, create) do
+    {:ok, entity} =
+      attrs
+      |> create.()
+
+    entity
   end
 end
