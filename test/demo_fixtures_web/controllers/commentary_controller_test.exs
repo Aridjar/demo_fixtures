@@ -18,7 +18,7 @@ defmodule DemoFixturesWeb.CommentaryControllerTest do
 
   describe "create commentary" do
     test "redirects to show when data is valid", %{conn: conn} do
-      conn = post(conn, Routes.commentary_path(conn, :create), commentary: @valid_attrs)
+      conn = post(conn, Routes.commentary_path(conn, :create), commentary: create_commentary_attrs())
 
       assert %{id: id} = redirected_params(conn)
       assert redirected_to(conn) == Routes.commentary_path(conn, :show, id)

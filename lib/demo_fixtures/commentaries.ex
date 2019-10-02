@@ -17,7 +17,11 @@ defmodule DemoFixtures.Commentaries do
       [%Commentary{}, ...]
 
   """
-  def list_commentaries, do: Repo.all(Commentary)
+  def list_commentaries do
+    Commentary
+    |> preload(:post)
+    |> Repo.all()
+   end
 
   @doc """
   Gets a single commentary.
@@ -33,7 +37,11 @@ defmodule DemoFixtures.Commentaries do
       ** (Ecto.NoResultsError)
 
   """
-  def get_commentary!(id), do: Repo.get!(Commentary, id)
+  def get_commentary!(id) do
+    Commentary
+    |> preload(:post)
+    |> Repo.get!(id)
+  end
 
   @doc """
   Creates a commentary.

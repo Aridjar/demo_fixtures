@@ -1,5 +1,7 @@
 defmodule DemoFixtures.Fixtures do
 
+  alias DemoFixtures.Repo
+
   def post do
     quote do
       alias DemoFixtures.{Posts, Posts.Post}

@@ -15,7 +15,7 @@ defmodule DemoFixtures.CommentariesTest do
     end
 
     test "create_commentary/1 with valid data creates a commentary" do
-      assert {:ok, %Commentary{} = commentary} = Commentaries.create_commentary(@valid_attrs)
+      assert {:ok, %Commentary{} = commentary} = Commentaries.create_commentary(create_commentary_attrs())
       assert commentary.content == "some content"
     end
 
