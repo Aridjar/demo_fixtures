@@ -25,6 +25,30 @@ defmodule DemoFixtures.Fixtures do
     end
   end
 
+  def commentary do
+    quote do
+      alias DemoFixtures.{Commentaries, Commentaries.Commentary}
+
+      @valid_attrs %{content: "some content"}
+      @update_attrs %{content: "some updated content"}
+      @invalid_attrs %{content: nil}
+
+      defp create_commentary(_) do
+        commentary = commentary_fixture()
+        {:ok, commentary: commentary}
+      end
+
+      def commentary_fixture(attrs \\ %{}) do
+        {:ok, commentary} =
+          attrs
+          |> Enum.into(@valid_attrs)
+          |> Commentaries.create_commentary()
+
+        commentary
+      end
+    end
+  end
+
   defmacro __using__(fixtures) when is_list(fixtures) do
     for fixture <- fixtures, is_atom(fixture), do: apply(__MODULE__, fixture, [])
   end

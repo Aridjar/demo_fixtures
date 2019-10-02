@@ -18,6 +18,7 @@ defmodule DemoFixturesWeb.Router do
 
     get "/", PageController, :index
     resources "/posts/", PostController
+    resources "/commentaries/", CommentaryController
   end
 
   # Other scopes may use custom stacks.

@@ -1,16 +1,6 @@
 defmodule DemoFixturesWeb.CommentaryControllerTest do
   use DemoFixturesWeb.ConnCase
-
-  alias DemoFixtures.Commentaries
-
-  @create_attrs %{content: "some content"}
-  @update_attrs %{content: "some updated content"}
-  @invalid_attrs %{content: nil}
-
-  def fixture(:commentary) do
-    {:ok, commentary} = Commentaries.create_commentary(@create_attrs)
-    commentary
-  end
+  use DemoFixtures.Fixtures, [:commentary]
 
   describe "index" do
     test "lists all commentaries", %{conn: conn} do
@@ -28,7 +18,7 @@ defmodule DemoFixturesWeb.CommentaryControllerTest do
 
   describe "create commentary" do
     test "redirects to show when data is valid", %{conn: conn} do
-      conn = post(conn, Routes.commentary_path(conn, :create), commentary: @create_attrs)
+      conn = post(conn, Routes.commentary_path(conn, :create), commentary: @valid_attrs)
 
       assert %{id: id} = redirected_params(conn)
       assert redirected_to(conn) == Routes.commentary_path(conn, :show, id)
@@ -79,10 +69,5 @@ defmodule DemoFixturesWeb.CommentaryControllerTest do
         get(conn, Routes.commentary_path(conn, :show, commentary))
       end
     end
-  end
-
-  defp create_commentary(_) do
-    commentary = fixture(:commentary)
-    {:ok, commentary: commentary}
   end
 end

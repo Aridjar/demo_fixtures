@@ -2,9 +2,11 @@ defmodule DemoFixtures.Commentaries.Commentary do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias DemoFixtures.Posts.Post
+
   schema "commentaries" do
     field :content, :string
-    field :post_id, :id
+    belongs_to :post, Post, on_replace: :update
 
     timestamps()
   end

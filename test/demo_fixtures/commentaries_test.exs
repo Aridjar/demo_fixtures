@@ -1,23 +1,8 @@
 defmodule DemoFixtures.CommentariesTest do
   use DemoFixtures.DataCase
-
-  alias DemoFixtures.Commentaries
+  use DemoFixtures.Fixtures, [:commentary]
 
   describe "commentaries" do
-    alias DemoFixtures.Commentaries.Commentary
-
-    @valid_attrs %{content: "some content"}
-    @update_attrs %{content: "some updated content"}
-    @invalid_attrs %{content: nil}
-
-    def commentary_fixture(attrs \\ %{}) do
-      {:ok, commentary} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Commentaries.create_commentary()
-
-      commentary
-    end
 
     test "list_commentaries/0 returns all commentaries" do
       commentary = commentary_fixture()
