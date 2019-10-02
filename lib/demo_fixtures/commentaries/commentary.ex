@@ -15,6 +15,13 @@ defmodule DemoFixtures.Commentaries.Commentary do
   def changeset(commentary, attrs) do
     commentary
     |> cast(attrs, [:content])
-    |> validate_required([:content])
+    |> add_post(attrs)
+    |> validate_required([:content, :post])
   end
+
+  defp add_post(changeset, %{"post" => post}),
+    do: put_assoc(changeset, :post, post)
+
+  defp add_post(changeset, %{post: post}), do: put_assoc(changeset, :post, post)
+  defp add_post(changeset, _), do: changeset
 end
